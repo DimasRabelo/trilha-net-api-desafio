@@ -1,58 +1,60 @@
-# DIO - Trilha .NET - API e Entity Framework
-www.dio.me
+# ✅ SOLUÇÃO COMPLETA: DIO - Trilha .NET - API e Entity Framework
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de API e Entity Framework, da trilha .NET da DIO.
+## Contexto do Desafio
+O objetivo desta atividade foi construir um sistema gerenciador de tarefas (To-Do List) com a implementação de todos os métodos **CRUD** (Create, Read, Update, Delete) e filtros de busca, utilizando **ASP  .NET Core** e **Entity Framework Core**. 
 
-## Contexto
-Você precisa construir um sistema gerenciador de tarefas, onde você poderá cadastrar uma lista de tarefas que permitirá organizar melhor a sua rotina.
+---
 
-Essa lista de tarefas precisa ter um CRUD, ou seja, deverá permitir a você obter os registros, criar, salvar e deletar esses registros.
+## 🛠️ Solução Implementada
 
-A sua aplicação deverá ser do tipo Web API ou MVC, fique a vontade para implementar a solução que achar mais adequado.
+O projeto foi concluído implementando a totalidade dos endpoints esperados e configurando a persistência de dados.
 
-A sua classe principal, a classe de tarefa, deve ser a seguinte:
+### 1. Modelo de Dados
 
-![Diagrama da classe Tarefa](diagrama.png)
+A classe principal implementada no projeto é `Tarefa`, conforme o diagrama:
 
-Não se esqueça de gerar a sua migration para atualização no banco de dados.
+| Propriedade | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `Id` | `int` | Chave primária (PK). |
+| `Titulo` | `string` | Título da Tarefa. |
+| `Descricao` | `string` | Detalhes da Tarefa. |
+| `Data` | `DateTime` | Data e hora de agendamento. |
+| `Status` | `EnumStatusTarefa` | Status atual da tarefa (Pendente, Finalizado, etc.). |
 
-## Métodos esperados
-É esperado que você crie o seus métodos conforme a seguir:
+### 2. Configuração do Banco de Dados
 
-
-**Swagger**
-
-
-![Métodos Swagger](swagger.png)
-
-
-**Endpoints**
-
-
-| Verbo  | Endpoint                | Parâmetro | Body          |
-|--------|-------------------------|-----------|---------------|
-| GET    | /Tarefa/{id}            | id        | N/A           |
-| PUT    | /Tarefa/{id}            | id        | Schema Tarefa |
-| DELETE | /Tarefa/{id}            | id        | N/A           |
-| GET    | /Tarefa/ObterTodos      | N/A       | N/A           |
-| GET    | /Tarefa/ObterPorTitulo  | titulo    | N/A           |
-| GET    | /Tarefa/ObterPorData    | data      | N/A           |
-| GET    | /Tarefa/ObterPorStatus  | status    | N/A           |
-| POST   | /Tarefa                 | N/A       | Schema Tarefa |
-
-Esse é o schema (model) de Tarefa, utilizado para passar para os métodos que exigirem
+* **Tecnologia:** SQL Server (Instalado diretamente no ambiente Linux Mint).
+* **Persistência:** Entity Framework Core (Geradas e aplicadas as Migrations para a criação da tabela `Tarefa`).
+* **String de Conexão:** A conexão foi configurada em `appsettings.json`, usando o formato para conexão com o SQL Server no Linux:
 
 ```json
-{
-  "id": 0,
-  "titulo": "string",
-  "descricao": "string",
-  "data": "2022-06-08T01:31:07.056Z",
-  "status": "Pendente"
+"ConnectionStrings": {
+  "ConexaoPadrao": "Server=localhost,1433;Database=Agenda;User Id=sa;Password=0351Dede;TrustServerCertificate=True;"
 }
 ```
 
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+📊 Endpoints e Resultados dos Testes (Swagger UI)
+
+```   
+Todos os endpoints na TarefaController foram implementados, testados via Swagger UI e retornaram o status HTTP esperado.
+
+Verbo	    Endpoint	    Parâmetro	        Ação	            Status Esperado	              Status Obtido
+
+POST	    /Tarefa	          N/A	    Cria uma nova tarefa.	    201 Created	                    ✅ 201
+
+GET	    /Tarefa/{id}	       id	    Lê a tarefa pelo ID.	    200 OK	                        ✅ 200
+
+PUT	     /Tarefa/{id}	       id	     Atualiza a tarefa.	      200 OK	                        ✅ 200
+
+DELETE	/Tarefa/{id}	       id	      Deleta a tarefa.	      204 No                          ✅ 204
+
+GET	    /Tarefa/ObterTodos	N/A	    Lista todas as tarefas.	  200 OK	                        ✅ 200
+
+GET	 /Tarefa/ObterPorTitulo	titulo	 Filtra por título        200 OK	                        ✅ 200
+
+GET	/Tarefa/ObterPorData	  data	    Filtra por data.	      200 OK	                        ✅ 200
+
+GET	/Tarefa/ObterPorStatus	status	  Filtra por status       200 OK	                        ✅ 200
+```
+
