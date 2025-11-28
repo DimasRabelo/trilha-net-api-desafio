@@ -58,3 +58,8 @@ GET	/Tarefa/ObterPorData	  data	    Filtra por data.	      200 OK	              
 GET	/Tarefa/ObterPorStatus	status	  Filtra por status       200 OK	                        ✅ 200
 ```
 
+## 📄 Relatório de Conclusão e Testes
+
+Para visualizar todos os logs das requisições CRUD, filtros e códigos de resposta (201, 200, 404, etc.) realizados no Swagger UI, acesse o documento completo:
+
+[**Acessar Relatório de Testes (DOCX)**](Relatório-De-Testes.docx)
